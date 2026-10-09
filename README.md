@@ -2,9 +2,18 @@
 
 `@wout4375975/mrsubsidie-pm-core` is de gedeelde TypeScript-kern voor de Mistersubsidie-projectmanagementportals. De package bevat uitsluitend herbruikbare code. Projectgegevens, Airtable-bases, domeinen, deploymenttargets en geheimen blijven altijd in de afzonderlijke portal.
 
-## Status
+## Status en publieke API
 
-Versie `0.1.0` levert bewust nog geen publieke API. Deze eerste release verifieert uitsluitend de package-, build-, test- en publicatieketen. UI-exports volgen in Subfase 1.2.
+Versie `0.2.0` levert de eerste UI-subpath-exports. Importeer uitsluitend via de gedocumenteerde package-ingangen, bijvoorbeeld:
+
+```ts
+import { Badge } from "@wout4375975/mrsubsidie-pm-core/ui/badge";
+import { Label } from "@wout4375975/mrsubsidie-pm-core/ui/label";
+import { Separator } from "@wout4375975/mrsubsidie-pm-core/ui/separator";
+import { cn } from "@wout4375975/mrsubsidie-pm-core/ui/utils";
+```
+
+De package bevat nu avatar, badge, button, card, dialog, dropdown-menu, label, scroll-area, select, separator, sheet, skeleton, toggle, tooltip en `cn`. `input`, `textarea`, `sidebar` en `sonner` blijven voorlopig portaalgebonden.
 
 ## Installatie vanuit GitHub Packages
 
@@ -17,7 +26,7 @@ Voeg in de consumerende portal een tokenvrije `.npmrc` toe:
 Installeer de package vervolgens met pnpm:
 
 ```bash
-pnpm add @wout4375975/mrsubsidie-pm-core@0.1.0
+pnpm add @wout4375975/mrsubsidie-pm-core@0.2.0
 ```
 
 Voor een private package is authenticatie nodig. Gebruik lokaal een klassieke GitHub PAT met minimaal `read:packages` in een **user-level** `~/.npmrc`; commit nooit een token:
@@ -27,6 +36,17 @@ Voor een private package is authenticatie nodig. Gebruik lokaal een klassieke Gi
 ```
 
 In GitHub Actions staat het token uitsluitend als repository-secret `PACKAGES_READ_TOKEN` en wordt het als `NODE_AUTH_TOKEN` aan de installatiestap doorgegeven.
+
+## Tailwind CSS v4 in consumerende portals
+
+Tailwind v4 scant `node_modules` niet automatisch. Iedere portal die UI uit deze package importeert, moet daarom direct na `@import "tailwindcss";` een `@source`-regel opnemen:
+
+```css
+@import "tailwindcss";
+@source "../../node_modules/@wout4375975/mrsubsidie-pm-core/dist";
+```
+
+Een portal-build en productie-smoke-test zijn pas geldig nadat deze regel aanwezig is en de gegenereerde CSS de utilities van de package bevat.
 
 ## Lokale ontwikkeling zonder PAT
 
