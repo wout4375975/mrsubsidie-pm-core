@@ -4,8 +4,9 @@ Alle relevante wijzigingen aan deze package worden in dit bestand vastgelegd.
 
 ## Onversieerde distributiewijziging — 2026-10-09
 
-- `@wout4375975/mrsubsidie-pm-core` is na publicatie van versie `0.2.0` als publieke GitHub Package beschikbaar gemaakt.
-- Portal-repositories kunnen de bestaande packageversies zonder `PACKAGES_READ_TOKEN`, `NODE_AUTH_TOKEN` of andere registry-credential installeren.
+- De core-repository is openbaar en wordt de standaarddistributieroute voor tokenloze portals.
+- De gecontroleerde `dist/`-releaseoutput wordt in git vastgelegd, zodat portals een exacte core-commit als dependency kunnen pinnen zonder registrycredential.
+- GitHub Packages kan publiek zichtbaar zijn, maar de GitHub npm-registry vereist ook voor publieke packages een token bij installatie. `npm.pkg.github.com` is daarom niet de route voor WebDev-productiebouw of andere tokenloze portals.
 - De packageversie en de export-interface zijn hierbij niet gewijzigd; dit is uitsluitend een wijziging in distributie en toegang.
 
 ## 0.2.0 — 2026-10-09

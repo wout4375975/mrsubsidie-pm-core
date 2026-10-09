@@ -115,8 +115,9 @@
     "lint": "eslint .",
     "test": "vitest run",
     "verify:package": "node scripts/verify-package.mjs",
+    "verify:git-artifact": "node scripts/verify-git-artifact.mjs",
     "pack:check": "rm -rf .artifacts && pnpm pack --pack-destination .artifacts && node scripts/verify-packed-tarball.mjs",
-    "release:check": "pnpm lint && pnpm check && pnpm test && pnpm build && pnpm verify:package && pnpm pack:check"
+    "release:check": "pnpm lint && pnpm check && pnpm test && pnpm build && pnpm verify:package && pnpm verify:git-artifact && pnpm pack:check"
   },
   "peerDependencies": {
     "@radix-ui/react-avatar": "^1.1.10",

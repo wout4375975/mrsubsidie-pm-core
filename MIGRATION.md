@@ -8,10 +8,11 @@ Voer vóór elke migratie deze pre-checks uit:
 
 1. Vergelijk de Tailwind-versie van de doelportal met Horeca. Als ScootHub of HOP nog Tailwind CSS v3 gebruikt, voer eerst een afzonderlijke v4-upgrade uit. De core-UI gebruikt Tailwind v4 en portalstylesheets moeten `@source` gebruiken om classes uit de core-package te detecteren.
 2. Vergelijk React-, TypeScript-, Radix- en package-manager-versies met de peer- en engine-eisen van de coreversie.
-3. Gebruik een tokenvrije scoped `.npmrc` met alleen `@wout4375975:registry=https://npm.pkg.github.com`. De core-package is publiek; `PACKAGES_READ_TOKEN`, `NODE_AUTH_TOKEN` en andere registry-secrets zijn niet nodig in portal-repositories of hun buildomgevingen.
-4. Controleer de anonieme package-installatie expliciet met een schone installatiestap, zodat geen lokale npm-cache of bestaande credential het resultaat maskeert.
-5. Leg de huidige deploymentconfiguratie en Airtable-base van de doelportal vast. De migratie mag geen `PROJECT_*`, `AIRTABLE_*`, domein, target of secret wijzigen.
-6. Voer de volledige portal-CI en een productie-smoke-test uit voordat een volgende portal start.
+3. Gebruik de openbare core-repository als exacte git-dependency (`github:wout4375975/mrsubsidie-pm-core#COMMIT_SHA`). Gebruik nooit een beweeglijke branchnaam.
+4. Verwijder de scoped GitHub Packages-registratie uit `.npmrc`. `PACKAGES_READ_TOKEN`, `NODE_AUTH_TOKEN` en andere registry-secrets zijn niet nodig in portal-repositories of hun buildomgevingen.
+5. Controleer de anonieme package-installatie expliciet met een schone installatiestap, zodat geen lokale npm-cache of bestaande credential het resultaat maskeert.
+6. Leg de huidige deploymentconfiguratie en Airtable-base van de doelportal vast. De migratie mag geen `PROJECT_*`, `AIRTABLE_*`, domein, target of secret wijzigen.
+7. Voer de volledige portal-CI en een productie-smoke-test uit voordat een volgende portal start.
 
 ## Rollback
 
