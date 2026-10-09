@@ -2,6 +2,12 @@
 
 Alle relevante wijzigingen aan deze package worden in dit bestand vastgelegd.
 
+## Onversieerde distributiewijziging — 2026-10-09
+
+- `@wout4375975/mrsubsidie-pm-core` is na publicatie van versie `0.2.0` als publieke GitHub Package beschikbaar gemaakt.
+- Portal-repositories kunnen de bestaande packageversies zonder `PACKAGES_READ_TOKEN`, `NODE_AUTH_TOKEN` of andere registry-credential installeren.
+- De packageversie en de export-interface zijn hierbij niet gewijzigd; dit is uitsluitend een wijziging in distributie en toegang.
+
 ## 0.2.0 — 2026-10-09
 
 - Gedeelde stateless UI-primitieven als stabiele subpath-exports onder `./ui/*`.
