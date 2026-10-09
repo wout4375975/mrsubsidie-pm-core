@@ -1,6 +1,6 @@
 {
   "name": "@wout4375975/mrsubsidie-pm-core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Gedeelde TypeScript-kern voor Mistersubsidie projectmanagementportals.",
   "type": "module",
   "private": false,
@@ -19,6 +19,81 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./ui/avatar": {
+      "types": "./dist/ui/avatar.d.ts",
+      "import": "./dist/ui/avatar.js",
+      "require": "./dist/ui/avatar.cjs"
+    },
+    "./ui/badge": {
+      "types": "./dist/ui/badge.d.ts",
+      "import": "./dist/ui/badge.js",
+      "require": "./dist/ui/badge.cjs"
+    },
+    "./ui/button": {
+      "types": "./dist/ui/button.d.ts",
+      "import": "./dist/ui/button.js",
+      "require": "./dist/ui/button.cjs"
+    },
+    "./ui/card": {
+      "types": "./dist/ui/card.d.ts",
+      "import": "./dist/ui/card.js",
+      "require": "./dist/ui/card.cjs"
+    },
+    "./ui/dialog": {
+      "types": "./dist/ui/dialog.d.ts",
+      "import": "./dist/ui/dialog.js",
+      "require": "./dist/ui/dialog.cjs"
+    },
+    "./ui/dropdown-menu": {
+      "types": "./dist/ui/dropdown-menu.d.ts",
+      "import": "./dist/ui/dropdown-menu.js",
+      "require": "./dist/ui/dropdown-menu.cjs"
+    },
+    "./ui/label": {
+      "types": "./dist/ui/label.d.ts",
+      "import": "./dist/ui/label.js",
+      "require": "./dist/ui/label.cjs"
+    },
+    "./ui/scroll-area": {
+      "types": "./dist/ui/scroll-area.d.ts",
+      "import": "./dist/ui/scroll-area.js",
+      "require": "./dist/ui/scroll-area.cjs"
+    },
+    "./ui/select": {
+      "types": "./dist/ui/select.d.ts",
+      "import": "./dist/ui/select.js",
+      "require": "./dist/ui/select.cjs"
+    },
+    "./ui/separator": {
+      "types": "./dist/ui/separator.d.ts",
+      "import": "./dist/ui/separator.js",
+      "require": "./dist/ui/separator.cjs"
+    },
+    "./ui/sheet": {
+      "types": "./dist/ui/sheet.d.ts",
+      "import": "./dist/ui/sheet.js",
+      "require": "./dist/ui/sheet.cjs"
+    },
+    "./ui/skeleton": {
+      "types": "./dist/ui/skeleton.d.ts",
+      "import": "./dist/ui/skeleton.js",
+      "require": "./dist/ui/skeleton.cjs"
+    },
+    "./ui/toggle": {
+      "types": "./dist/ui/toggle.d.ts",
+      "import": "./dist/ui/toggle.js",
+      "require": "./dist/ui/toggle.cjs"
+    },
+    "./ui/tooltip": {
+      "types": "./dist/ui/tooltip.d.ts",
+      "import": "./dist/ui/tooltip.js",
+      "require": "./dist/ui/tooltip.cjs"
+    },
+    "./ui/utils": {
+      "types": "./dist/ui/utils.d.ts",
+      "import": "./dist/ui/utils.js",
+      "require": "./dist/ui/utils.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -43,10 +118,46 @@
     "pack:check": "rm -rf .artifacts && pnpm pack --pack-destination .artifacts && node scripts/verify-packed-tarball.mjs",
     "release:check": "pnpm lint && pnpm check && pnpm test && pnpm build && pnpm verify:package && pnpm pack:check"
   },
+  "peerDependencies": {
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-scroll-area": "^1.2.10",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-toggle": "^1.1.10",
+    "@radix-ui/react-tooltip": "^1.2.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.453.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "tailwind-merge": "^3.3.1"
+  },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-scroll-area": "^1.2.10",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-toggle": "^1.1.10",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "@types/node": "^22.0.0",
+    "@types/react": "^19.2.1",
+    "@types/react-dom": "^19.2.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "eslint": "10.3.0",
+    "lucide-react": "^0.453.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "tailwind-merge": "^3.3.1",
     "tsup": "^8.3.5",
     "typescript": "5.9.3",
     "typescript-eslint": "8.59.1",
