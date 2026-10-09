@@ -1,0 +1,55 @@
+{
+  "name": "@wout4375975/mrsubsidie-pm-core",
+  "version": "0.1.0",
+  "description": "Gedeelde TypeScript-kern voor Mistersubsidie projectmanagementportals.",
+  "type": "module",
+  "private": false,
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "MIGRATION.md"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wout4375975/mrsubsidie-pm-core.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@10.4.1",
+  "scripts": {
+    "build": "tsup",
+    "check": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "verify:package": "node scripts/verify-package.mjs",
+    "pack:check": "rm -rf .artifacts && pnpm pack --pack-destination .artifacts && node scripts/verify-packed-tarball.mjs",
+    "release:check": "pnpm lint && pnpm check && pnpm test && pnpm build && pnpm verify:package && pnpm pack:check"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "^22.0.0",
+    "eslint": "10.3.0",
+    "tsup": "^8.3.5",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.59.1",
+    "vitest": "2.1.9"
+  }
+}

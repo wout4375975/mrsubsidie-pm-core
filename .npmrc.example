@@ -1,0 +1,6 @@
+# Scoped packages van Mistersubsidie lopen via GitHub Packages.
+@wout4375975:registry=https://npm.pkg.github.com
+
+# Voeg nooit een token toe aan deze versiebeheerde file.
+# Gebruik lokaal een user-level ~/.npmrc of een omgevingsvariabele NODE_AUTH_TOKEN.
+# Voor lokale ontwikkeling zonder PAT: gebruik een file:-dependency of pnpm link.
