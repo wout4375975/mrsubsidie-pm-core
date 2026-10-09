@@ -2,6 +2,13 @@
 
 Alle relevante wijzigingen aan deze package worden in dit bestand vastgelegd.
 
+## Onversieerde distributiewijziging — 2026-10-09
+
+- De core-repository is openbaar en wordt de standaarddistributieroute voor tokenloze portals.
+- De gecontroleerde `dist/`-releaseoutput wordt in git vastgelegd, zodat portals een exacte core-commit als dependency kunnen pinnen zonder registrycredential.
+- GitHub Packages kan publiek zichtbaar zijn, maar de GitHub npm-registry vereist ook voor publieke packages een token bij installatie. `npm.pkg.github.com` is daarom niet de route voor WebDev-productiebouw of andere tokenloze portals.
+- De packageversie en de export-interface zijn hierbij niet gewijzigd; dit is uitsluitend een wijziging in distributie en toegang.
+
 ## 0.2.0 — 2026-10-09
 
 - Gedeelde stateless UI-primitieven als stabiele subpath-exports onder `./ui/*`.

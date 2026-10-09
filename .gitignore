@@ -1,5 +1,5 @@
 node_modules/
-dist/
+# dist/ wordt bewust getrackt als gecontroleerd release-artifact voor tokenvrije git-dependencies.
 .artifacts/
 coverage/
 *.tsbuildinfo

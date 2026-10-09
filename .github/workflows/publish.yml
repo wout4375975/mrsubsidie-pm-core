@@ -36,6 +36,8 @@ jobs:
         run: pnpm build
       - name: Verify package outputs
         run: pnpm verify:package
+      - name: Verify git release artifacts
+        run: pnpm verify:git-artifact
       - name: Verify packed tarball
         run: pnpm pack:check
 
