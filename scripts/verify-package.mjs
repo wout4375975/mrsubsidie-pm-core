@@ -39,17 +39,12 @@ const packageManifest = JSON.parse(readFileSync("package.json", "utf8"));
 assert.equal(packageManifest.name, "@wout4375975/mrsubsidie-pm-core");
 assert.equal(packageManifest.version, "0.2.0");
 assert.equal(packageManifest.private, false);
-assert.equal(
-  packageManifest.publishConfig?.registry,
-  "https://npm.pkg.github.com"
-);
+assert.equal(packageManifest.publishConfig, undefined);
 for (const entry of uiEntries) {
   assert.ok(packageManifest.exports[`./ui/${entry}`]);
 }
 
-const npmrc = readFileSync(".npmrc", "utf8");
-assert.match(npmrc, /@wout4375975:registry=https:\/\/npm\.pkg\.github\.com/);
-assert.doesNotMatch(npmrc, /_authToken|NPM_PUBLISH_TOKEN|ghp_|github_pat_/i);
+assert.equal(existsSync(".npmrc"), false, "De core gebruikt geen npm-registryconfiguratie.");
 
 const esmRootPackage = await import(pathToFileURL(resolve("dist/index.js")).href);
 const require = createRequire(import.meta.url);
@@ -69,4 +64,4 @@ assert.equal(typeof esmBadgePackage.badgeVariants, "function");
 assert.equal(typeof cjsBadgePackage.Badge, "function");
 assert.equal(typeof esmUtilsPackage.cn, "function");
 
-console.log("Package-build, UI-ingangen en veilige registryconfiguratie zijn gevalideerd.");
+console.log("Package-build, UI-ingangen en tokenloze gitdistributie zijn gevalideerd.");

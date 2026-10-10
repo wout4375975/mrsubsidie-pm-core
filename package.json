@@ -101,10 +101,6 @@
     "type": "git",
     "url": "https://github.com/wout4375975/mrsubsidie-pm-core.git"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "restricted"
-  },
   "engines": {
     "node": ">=22"
   },
@@ -116,6 +112,7 @@
     "test": "vitest run",
     "verify:package": "node scripts/verify-package.mjs",
     "verify:git-artifact": "node scripts/verify-git-artifact.mjs",
+    "release:prepare": "pnpm build && git add --all dist && pnpm verify:git-artifact",
     "pack:check": "rm -rf .artifacts && pnpm pack --pack-destination .artifacts && node scripts/verify-packed-tarball.mjs",
     "release:check": "pnpm lint && pnpm check && pnpm test && pnpm build && pnpm verify:package && pnpm verify:git-artifact && pnpm pack:check"
   },

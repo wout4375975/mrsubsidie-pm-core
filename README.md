@@ -17,21 +17,21 @@ De package bevat avatar, badge, button, card, dialog, dropdown-menu, label, scro
 
 ## Tokenvrije installatie vanuit de openbare core-repository
 
-De openbare core-repository is de standaarddistributieroute voor portals zonder registry-authenticatie. Pin altijd op een exacte, gecontroleerde git-commit; gebruik nooit een beweeglijke branchnaam.
+De openbare core-repository is de standaarddistributieroute voor portals zonder registry-authenticatie. Pin altijd op een vaste, gecontroleerde releasetag; gebruik nooit een beweeglijke branchnaam.
 
 ```json
 {
   "dependencies": {
-    "@wout4375975/mrsubsidie-pm-core": "github:wout4375975/mrsubsidie-pm-core#COMMIT_SHA"
+    "@wout4375975/mrsubsidie-pm-core": "git+https://github.com/wout4375975/mrsubsidie-pm-core.git#v0.2.0"
   }
 }
 ```
 
-De core commit de gecontroleerde `dist/`-releaseoutput mee. Daardoor vereist een schone `pnpm install --frozen-lockfile` geen buildscript, `.npmrc`, `PACKAGES_READ_TOKEN`, `NODE_AUTH_TOKEN` of andere registry-credential. Voer na iedere wijziging een anonieme installatiecontrole uit in een schone directory.
+De core commit de gecontroleerde `dist/`-releaseoutput mee. `pnpm release:prepare` bouwt die output, neemt uitsluitend `dist/` op in de index en valideert de git-artifacts; CI valideert vervolgens dezelfde artifacts via `pnpm release:check`. Daardoor vereist een schone `pnpm install --frozen-lockfile` geen buildscript, `.npmrc`, `PACKAGES_READ_TOKEN`, `NODE_AUTH_TOKEN` of andere registry-credential. Voer na iedere wijziging een anonieme installatiecontrole uit in een schone directory.
 
 ### GitHub Packages
 
-De GitHub Package kan zichtbaar of publiek zijn, maar de npm-registry van GitHub vereist volgens de officiële GitHub-documentatie nog steeds een access token voor installatie. Gebruik `npm.pkg.github.com` daarom alleen voor omgevingen waar expliciet registry-authenticatie beschikbaar is; WebDev-productiebouw en toekomstige tokenloze portals gebruiken de vaste git-dependency hierboven.
+De GitHub Package kan zichtbaar of publiek blijven als archief, maar wordt niet meer gebruikt door portals. De npm-registry van GitHub vereist volgens de officiële GitHub-documentatie een access token voor installatie. WebDev-productiebouw en alle toekomstige portals gebruiken daarom uitsluitend de vaste git-dependency hierboven.
 
 ## Tailwind CSS v4 in consumerende portals
 
@@ -61,7 +61,7 @@ cd ../horeca-academy-slim-dashboard
 pnpm link --global @wout4375975/mrsubsidie-pm-core
 ```
 
-Herstel vóór code review altijd de vaste git-commitdependency en commit de bijbehorende `pnpm-lock.yaml`.
+Herstel vóór code review altijd de vaste git-tagdependency en commit de bijbehorende `pnpm-lock.yaml`.
 
 ## Ontwikkelen en controleren
 
@@ -76,18 +76,16 @@ pnpm verify:git-artifact
 pnpm pack:check
 ```
 
-`pnpm release:check` voert deze controles in de verplichte volgorde uit. `verify:git-artifact` controleert dat de gebouwde `dist/`-output volledig en ongewijzigd in git is vastgelegd. De tarballcontrole verifieert daarnaast dat geen `.npmrc`-token of omgevingsbestand in een package-artefact terechtkomt.
+`pnpm release:prepare` maakt de releaseoutput expliciet gereed voor commit. `pnpm release:check` voert de kwaliteitscontroles in de verplichte volgorde uit. `verify:git-artifact` controleert dat de gebouwde `dist/`-output volledig en ongewijzigd in git is vastgelegd. De tarballcontrole verifieert daarnaast dat geen `.npmrc`-token of omgevingsbestand in een package-artefact terechtkomt.
 
-## Optionele GitHub Packages-publicatie
+## GitHub Packages-archief
 
-De workflow `.github/workflows/publish.yml` publiceert alleen na een merge naar `main`, nadat lint, typecontrole, tests, build en tarballcontrole slagen. Hiervoor blijft `NPM_PUBLISH_TOKEN` als private repository-secret nodig; de secret verschijnt nooit in repositorybestanden of workflowlogs.
-
-Elke packagepublicatie vereist een nieuwe semver-versie in `package.json`, een bijbehorende regel in `CHANGELOG.md`, een groene core-CI en een nieuwe, immutable packageversie. Patchversies zijn bugfixes, minorversies zijn backward-compatible uitbreidingen en majorversies zijn breaking changes.
+De GitHub Package-registry wordt niet meer gebruikt als runtime-distributieroute. Bestaande packageversies mogen als archief beschikbaar blijven; nieuwe portals gebruiken uitsluitend de vaste git-tagdependency. Er is daarom geen `PACKAGES_READ_TOKEN` of `NODE_AUTH_TOKEN` nodig in portalrepositories, CI of WebDev.
 
 ## Ontwerpprincipes
 
 - De core bevat geen `PROJECT_*`, `AIRTABLE_*`, domeinen, deploymenttargets of geheimen.
 - Portals importeren uitsluitend gedocumenteerde package-ingangen.
 - Portals krijgen geen klant- of projectspecifieke codeoverrides.
-- Iedere portal pinnen een core-commit in `pnpm-lock.yaml`; een core-upgrade is daarom een expliciete, geteste portalwijziging.
-- Een gepubliceerde packageversie wordt nooit overschreven of verwijderd om herstel te forceren; herstel gebeurt via een volgende patchrelease of een portalrollback naar de vorige vaste core-commit.
+- Iedere portal pinnen een core-releasetag in `pnpm-lock.yaml`; een core-upgrade is daarom een expliciete, geteste portalwijziging.
+- Een releasetag wordt nooit verplaatst of overschreven. Herstel gebeurt via een volgende patchrelease of een portalrollback naar de vorige vaste core-tag.
